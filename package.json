@@ -1,0 +1,13 @@
+{
+  "name": "sellbuys",
+  "version": "1.0.0",
+  "description": "Manage sold and purchased products",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"",
+    "start": "node src/index.js"
+  },
+  "author": "JC",
+  "license": "ISC"
+}
