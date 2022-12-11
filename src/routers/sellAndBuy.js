@@ -19,21 +19,18 @@ sellAndBuyRouter.get("/sellProduct", async (req, res) => {
         case "lowerCostPrice":
           sortedProducts = await SellBuy.find().sort({ costPrice: 1 });
           return res.send(sortedProducts);
-          break;
         case "higherCostPrice":
           sortedProducts = await SellBuy.find().sort({ costPrice: -1 });
           return res.send(sortedProducts);
-          break;
         case "lowerSoldPrice":
           sortedProducts = await SellBuy.find().sort({ soldPrice: 1 });
           return res.send(sortedProducts);
-          break;
         case "higherSoldPrice":
           sortedProducts = await SellBuy.find().sort({ soldPrice: -1 });
           return res.send(sortedProducts);
-          break;
         default:
-          break;
+          defaultProducts=await SellBuy.find();
+          return res.send(defaultProducts);
       }
     } catch (e) {
       res.status(400).send();
@@ -41,7 +38,7 @@ sellAndBuyRouter.get("/sellProduct", async (req, res) => {
   }
   try {
     let products = await SellBuy.find({});
-    console.log(products);
+    //console.log(products);
     if (!products) {
       res.status(400).send();
     }
@@ -72,7 +69,7 @@ sellAndBuyRouter.post("/sellProduct", async (req, res) => {
 });
 
 //update item
-sellAndBuyRouter.patch("/sellProduct:id", async (req, res) => {
+sellAndBuyRouter.patch("/sellProduct/:id", async (req, res) => {
   try {
     const product = await SellBuy.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -101,7 +98,7 @@ sellAndBuyRouter.patch("/sellProduct:id", async (req, res) => {
 });
 
 //delete item
-sellAndBuyRouter.delete("/sellProduct:id",async (req,res)=>{
+sellAndBuyRouter.delete("/sellProduct/:id",async (req,res)=>{
     try {
         const product=await SellBuy.findByIdAndDelete(req.params.id);
         if(!product){
